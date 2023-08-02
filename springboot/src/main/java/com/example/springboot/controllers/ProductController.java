@@ -1,9 +1,8 @@
 package com.example.springboot.controllers;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +21,10 @@ public class ProductController {
     ProductRepository productRepository;
     
     @PostMapping("/products") //video at 1:00:10
-    public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDto)
+    public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDto productRecordDto){
     var productModel = new ProductModel();
-    BeanUtils.copyProperties(ProductRecordDto, productModel);
-    return ResponseEntity.status(HttpStatusCode.CREATED).body(productRepository.save)
+    BeanUtils.copyProperties(productRecordDto, productModel);
+    return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productModel));
+    }
+
 }
