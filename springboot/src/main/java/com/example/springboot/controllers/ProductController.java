@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
     
-    @PostMapping("/products")
+    @PostMapping("/products") //video at 1:00:10
     public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDto)
     var productModel = new ProductModel();
     BeanUtils.copyProperties(ProductRecordDto, productModel);
